@@ -16,7 +16,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden}
 
-nav{position:fixed;top:0;width:100%;z-index:1000;padding:14px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,25,60,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(74,134,216,.25)}
+/* nav base styles moved to enhanced glassmorphism block below */
 .nl{display:flex;align-items:center;gap:11px}
 .nl img{height:40px;width:auto}
 .nlt{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:#fff}
@@ -50,7 +50,7 @@ h1.ht span{color:var(--blue-light)}
 .ctarow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
 .bp{background:var(--blue-mid);color:#fff;padding:14px 34px;border-radius:7px;font-weight:600;font-size:.92rem;text-decoration:none;border:none;cursor:pointer;transition:all .3s}
 .bp:hover{background:var(--blue-light);transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,99,184,.45)}
-.bo{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:14px 34px;border-radius:7px;font-weight:500;font-size:.92rem;text-decoration:none;transition:all .3s;cursor:pointer}
+.bo{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);padding:14px 34px;border-radius:7px;font-weight:500;font-size:.92rem;text-decoration:none;transition:all .3s;cursor:pointer;font-family:'Inter',sans-serif}
 .bo:hover{border-color:var(--blue-light);color:var(--blue-light)}
 .hstats{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 .st{text-align:center;background:rgba(255,255,255,.07);border:1px solid rgba(74,134,216,.25);padding:16px 28px;border-radius:12px;backdrop-filter:blur(6px)}
@@ -75,7 +75,7 @@ section{padding:88px 56px}
 .wt{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;margin-bottom:9px}
 .wb{color:rgba(255,255,255,.5);font-size:.86rem;line-height:1.65}
 
-#services{background:var(--off)}
+#services{background:var(--off);display:none}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:52px}
 .scard{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;overflow:hidden;transition:all .3s}
 .scard:hover{box-shadow:0 14px 40px rgba(26,79,160,.1);transform:translateY(-4px)}
@@ -153,14 +153,99 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
+/* Hamburger menu */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:1100;background:none;border:none}
+.hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(10,25,60,.97);backdrop-filter:blur(20px);padding:20px 24px;z-index:999;flex-direction:column;gap:6px;border-bottom:1px solid rgba(74,134,216,.25)}
+.mob-menu.open{display:flex}
+.mob-menu a,.mob-menu button{display:block;text-decoration:none;color:rgba(255,255,255,.85);font-size:.95rem;font-weight:500;padding:12px 0;border:none;background:none;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;border-bottom:1px solid rgba(74,134,216,.12)}
+.mob-menu a:hover,.mob-menu button:hover{color:var(--blue-light)}
+
+/* Enhanced Glassmorphism Nav */
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:14px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,25,60,.72);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(74,134,216,.2);box-shadow:0 4px 30px rgba(0,0,0,.15);transition:background .3s}
+nav.scrolled{background:rgba(10,25,60,.92)}
+
+/* Prices button in nav */
+.nav-prices-btn{background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));color:#fff!important;padding:6px 18px;border-radius:100px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .3s;letter-spacing:.3px}
+.nav-prices-btn:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(74,134,216,.5)}
+
+/* Prices Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(8,18,48,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:2000;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .35s}
+.modal-overlay.open{display:flex;opacity:1}
+.modal-box{background:#fff;border-radius:20px;max-width:950px;width:100%;max-height:88vh;overflow-y:auto;padding:44px;position:relative;transform:translateY(30px);transition:transform .4s cubic-bezier(.16,1,.3,1);box-shadow:0 25px 80px rgba(0,0,0,.3)}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.8rem;color:var(--gray);cursor:pointer;padding:8px;line-height:1;transition:color .2s;z-index:1}
+.modal-close:hover{color:var(--red)}
+.modal-header{text-align:center;margin-bottom:36px}
+.modal-header .stag{display:inline-block;color:var(--blue-mid);font-size:.75rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.modal-header .stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3vw,2.4rem);color:var(--blue-dark);line-height:1.2;margin-bottom:10px;font-weight:700}
+.modal-header .ssub{color:var(--gray);font-size:.93rem;line-height:1.7;max-width:500px;margin:0 auto}
+
+/* Education Section */
+#education{background:linear-gradient(180deg,#f7f9fe 0%,var(--off) 100%);padding:88px 56px;overflow:hidden}
+.edu-intro{text-align:center;margin-bottom:48px}
+.city-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:40px}
+.city-btn{display:flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;border:1.5px solid rgba(26,79,160,.15);background:#fff;cursor:pointer;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:500;color:var(--blue-dark);transition:all .3s;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.city-btn:hover{border-color:var(--blue-mid);box-shadow:0 6px 20px rgba(26,79,160,.12);transform:translateY(-2px)}
+.city-btn.active{background:var(--blue-mid);color:#fff;border-color:var(--blue-mid);box-shadow:0 6px 24px rgba(37,99,184,.35)}
+.city-btn .city-icon{font-size:1.3rem}
+.uni-container{min-height:100px;position:relative}
+.uni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+.uni-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.07);opacity:0;transform:translateY(20px);transition:all .5s cubic-bezier(.16,1,.3,1);box-shadow:0 4px 16px rgba(0,0,0,.05)}
+.uni-card.show{opacity:1;transform:translateY(0)}
+.uni-card:hover{box-shadow:0 12px 36px rgba(26,79,160,.12);transform:translateY(-4px)}
+.uni-card.show:hover{transform:translateY(-4px)}
+.uni-img{width:100%;height:250px;object-fit:cover;background:linear-gradient(135deg,var(--blue-pale),#c8d8f0);display:flex;align-items:center;justify-content:center}
+.uni-img-placeholder{width:100%;height:250px;background:linear-gradient(135deg,var(--blue-dark),var(--blue-mid));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:3rem;position:relative;overflow:hidden}
+.uni-img-placeholder::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='55' x='50' text-anchor='middle' font-size='40' fill='rgba(255,255,255,0.08)'%3E🏛%3C/text%3E%3C/svg%3E") center/60px repeat}
+.uni-body{padding:26px}
+.uni-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--blue-dark);margin-bottom:10px;line-height:1.3}
+.uni-desc{color:var(--gray);font-size:.88rem;line-height:1.75;margin-bottom:16px}
+.uni-specs{list-style:none;padding:0}
+.uni-specs li{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.85rem;color:var(--text);font-weight:500;border-bottom:1px solid rgba(0,0,0,.05)}
+.uni-specs li:last-child{border-bottom:none}
+.uni-specs li::before{content:'🎓';font-size:.9rem}
+.uni-empty{text-align:center;padding:60px 20px;color:var(--gray);font-size:.95rem}
+
+/* Success Roadmap */
+#roadmap{background:var(--blue-dark);padding:88px 56px;overflow:hidden}
+#roadmap .stitle{color:#fff}
+#roadmap .ssub{color:rgba(255,255,255,.5)}
+.roadmap-track{display:flex;justify-content:center;align-items:stretch;gap:0;margin-top:56px;position:relative;flex-wrap:wrap}
+.roadmap-step{flex:1;min-width:200px;max-width:280px;text-align:center;position:relative;padding:0 16px}
+.roadmap-icon{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 18px;box-shadow:0 8px 24px rgba(37,99,184,.35);position:relative;z-index:2}
+.roadmap-step:not(:last-child)::after{content:'';position:absolute;top:36px;left:calc(50% + 40px);width:calc(100% - 80px);height:2px;background:linear-gradient(90deg,var(--blue-light),rgba(74,134,216,.3));z-index:1}
+.roadmap-num{color:var(--blue-light);font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.roadmap-title{font-family:'Cormorant Garamond',serif;color:#fff;font-size:1.15rem;font-weight:600;margin-bottom:8px}
+.roadmap-desc{color:rgba(255,255,255,.5);font-size:.84rem;line-height:1.65}
+
+/* Animations */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInScale{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+
+/* Responsive overrides */
 @media(max-width:900px){
   nav{padding:14px 20px}
-  .nm{display:none}
   section{padding:70px 22px}
   #hero{padding:100px 20px 60px}
+  #education{padding:70px 22px}
+  #roadmap{padding:70px 22px}
   .ogrid,.agrid{grid-template-columns:1fr}
   footer{flex-direction:column;text-align:center}
   .fr{text-align:center}
+  .nm{display:none}
+  .hamburger{display:flex}
+  .modal-box{padding:24px;margin:10px}
+  .sgrid{grid-template-columns:1fr}
+  .uni-grid{grid-template-columns:1fr}
+  .city-grid{gap:8px}
+  .city-btn{padding:10px 16px;font-size:.82rem}
+  .roadmap-track{flex-direction:column;align-items:center;gap:28px}
+  .roadmap-step::after{display:none!important}
+  .roadmap-step{max-width:100%;min-width:auto}
 }
 </style>
 </head>
@@ -176,18 +261,31 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
   </div>
   <ul class="nm">
     <li><a href="#why" data-i18n="nav_why">Why Us</a></li>
-    <li><a href="#services" data-i18n="nav_services">Services</a></li>
+    <li><button class="nav-prices-btn" onclick="openPricesModal()" data-i18n="nav_prices">Prices</button></li>
+    <li><a href="#education" data-i18n="nav_education">Education</a></li>
     <li><a href="#about" data-i18n="nav_about">About</a></li>
     <li><a href="#reviews" data-i18n="nav_reviews">Reviews</a></li>
     <li><a href="#order" data-i18n="nav_order">Order</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
+  <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <div class="ls">
     <button class="lb active" onclick="setLang('en')">EN</button>
     <button class="lb" onclick="setLang('bg')">БГ</button>
     <button class="lb" onclick="setLang('gr')">ΕΛ</button>
   </div>
 </nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#why" onclick="closeMobileMenu()" data-i18n="nav_why">Why Us</a>
+  <button onclick="openPricesModal();closeMobileMenu()" data-i18n="nav_prices">Prices</button>
+  <a href="#education" onclick="closeMobileMenu()" data-i18n="nav_education">Education</a>
+  <a href="#about" onclick="closeMobileMenu()" data-i18n="nav_about">About</a>
+  <a href="#reviews" onclick="closeMobileMenu()" data-i18n="nav_reviews">Reviews</a>
+  <a href="#order" onclick="closeMobileMenu()" data-i18n="nav_order">Order</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+</div>
 
 <div class="fs"></div>
 
@@ -201,7 +299,7 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
     <div class="flags"><span class="fl">🇧🇬</span><span class="ar">⇄</span><span class="fl">🇬🇷</span></div>
     <div class="ctarow">
       <a href="#order" class="bp" data-i18n="cta1">Order Now</a>
-      <a href="#services" class="bo" data-i18n="cta2">See Services</a>
+      <button class="bo" onclick="openPricesModal()" data-i18n="cta2">See Services</button>
     </div>
     <div class="hstats">
       <div class="st"><div class="stn">600+</div><div class="stl" data-i18n="stat1">Clients</div></div>
@@ -227,47 +325,51 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
   </div>
 </section>
 
-<section id="services">
-  <div class="reveal">
-    <p class="stag" data-i18n="serv_tag">What we offer</p>
-    <h2 class="stitle" data-i18n="serv_title">Services &amp; Pricing</h2>
-    <p class="ssub" data-i18n="serv_sub">Fixed prices, three delivery speeds. You choose based on your deadline.</p>
+<!-- Prices Modal (was #services section) -->
+<div class="modal-overlay" id="pricesModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePricesModal()">&times;</button>
+    <div class="modal-header">
+      <p class="stag" data-i18n="serv_tag">What we offer</p>
+      <h2 class="stitle" data-i18n="serv_title">Services &amp; Pricing</h2>
+      <p class="ssub" data-i18n="serv_sub">Fixed prices, three delivery speeds. You choose based on your deadline.</p>
+    </div>
+    <div class="sgrid">
+      <div class="scard">
+        <div class="shead"><div class="sname" data-i18n="s1">Diploma / Certificate</div><div class="sbadge" data-i18n="s_pop">Most popular</div></div>
+        <div class="sbody">
+          <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">25 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">38 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">55 €</span></div>
+        </div>
+      </div>
+      <div class="scard">
+        <div class="shead"><div class="sname" data-i18n="s2">ID / Personal Docs</div></div>
+        <div class="sbody">
+          <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">20 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">30 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">45 €</span></div>
+        </div>
+      </div>
+      <div class="scard">
+        <div class="shead"><div class="sname" data-i18n="s3">Contract / Legal Doc</div></div>
+        <div class="sbody">
+          <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">from 35 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">from 50 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">from 80 €</span></div>
+        </div>
+      </div>
+      <div class="scard">
+        <div class="shead"><div class="sname" data-i18n="s4">Apostille &amp; Legalization</div><div class="sbadge">+notary</div></div>
+        <div class="sbody">
+          <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">40 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">55 €</span></div>
+          <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">75 €</span></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="sgrid">
-    <div class="scard reveal">
-      <div class="shead"><div class="sname" data-i18n="s1">Diploma / Certificate</div><div class="sbadge" data-i18n="s_pop">Most popular</div></div>
-      <div class="sbody">
-        <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">25 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">38 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">55 €</span></div>
-      </div>
-    </div>
-    <div class="scard reveal">
-      <div class="shead"><div class="sname" data-i18n="s2">ID / Personal Docs</div></div>
-      <div class="sbody">
-        <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">20 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">30 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">45 €</span></div>
-      </div>
-    </div>
-    <div class="scard reveal">
-      <div class="shead"><div class="sname" data-i18n="s3">Contract / Legal Doc</div></div>
-      <div class="sbody">
-        <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">from 35 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">from 50 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">from 80 €</span></div>
-      </div>
-    </div>
-    <div class="scard reveal">
-      <div class="shead"><div class="sname" data-i18n="s4">Apostille &amp; Legalization</div><div class="sbadge">+notary</div></div>
-      <div class="sbody">
-        <div class="pr"><span class="prt" data-i18n="std">Standard (3-5 days)</span><span class="prv">40 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="fast">Fast (1-2 days)</span><span class="prv">55 €</span></div>
-        <div class="pr"><span class="prt" data-i18n="expr">Express (same day)</span><span class="prv ex">75 €</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
 <section id="about">
   <div class="agrid">
@@ -287,6 +389,27 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
         <span class="atag" data-i18n="tag4">BG &amp; GR offices</span>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="edu-intro reveal">
+    <p class="stag" data-i18n="edu_tag">Education in Bulgaria</p>
+    <h2 class="stitle" data-i18n="edu_title">Study in Bulgaria</h2>
+    <p class="ssub" style="max-width:640px;margin:0 auto" data-i18n="edu_sub">Choose a city and discover top universities with world-recognized degrees, affordable tuition, and vibrant student life.</p>
+  </div>
+  <div class="city-grid" id="cityGrid">
+    <button class="city-btn" onclick="selectCity('sofia')"><span class="city-icon">🏙️</span><span data-i18n="city_sofia">Sofia</span></button>
+    <button class="city-btn" onclick="selectCity('plovdiv')"><span class="city-icon">🏛️</span><span data-i18n="city_plovdiv">Plovdiv</span></button>
+    <button class="city-btn" onclick="selectCity('varna')"><span class="city-icon">🌊</span><span data-i18n="city_varna">Varna</span></button>
+    <button class="city-btn" onclick="selectCity('pleven')"><span class="city-icon">🏥</span><span data-i18n="city_pleven">Pleven</span></button>
+    <button class="city-btn" onclick="selectCity('burgas')"><span class="city-icon">⛱️</span><span data-i18n="city_burgas">Burgas</span></button>
+    <button class="city-btn" onclick="selectCity('ruse')"><span class="city-icon">🌉</span><span data-i18n="city_ruse">Ruse</span></button>
+    <button class="city-btn" onclick="selectCity('stara_zagora')"><span class="city-icon">🌿</span><span data-i18n="city_stara_zagora">Stara Zagora</span></button>
+    <button class="city-btn" onclick="selectCity('blagoevgrad')"><span class="city-icon">⛰️</span><span data-i18n="city_blagoevgrad">Blagoevgrad</span></button>
+  </div>
+  <div class="uni-container" id="uniContainer">
+    <div class="uni-empty" data-i18n="edu_select_city">Select a city above to explore its universities</div>
   </div>
 </section>
 
@@ -359,6 +482,40 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
   </div>
 </section>
 
+<section id="roadmap">
+  <div class="reveal" style="text-align:center">
+    <p class="stag" style="color:var(--blue-light)" data-i18n="road_tag">Your journey</p>
+    <h2 class="stitle" data-i18n="road_title">Success Roadmap</h2>
+    <p class="ssub" style="max-width:560px;margin:0 auto" data-i18n="road_sub">From first consultation to university enrollment — we guide you every step of the way.</p>
+  </div>
+  <div class="roadmap-track">
+    <div class="roadmap-step reveal">
+      <div class="roadmap-icon">💬</div>
+      <div class="roadmap-num" data-i18n="road_step">Step 1</div>
+      <div class="roadmap-title" data-i18n="road_s1t">Consultation</div>
+      <div class="roadmap-desc" data-i18n="road_s1d">Free initial consultation to assess your documents and choose the right university and program.</div>
+    </div>
+    <div class="roadmap-step reveal">
+      <div class="roadmap-icon">📄</div>
+      <div class="roadmap-num" data-i18n="road_step2">Step 2</div>
+      <div class="roadmap-title" data-i18n="road_s2t">Translation</div>
+      <div class="roadmap-desc" data-i18n="road_s2d">Certified translation of all your documents — diplomas, transcripts, personal IDs — into Bulgarian.</div>
+    </div>
+    <div class="roadmap-step reveal">
+      <div class="roadmap-icon">✅</div>
+      <div class="roadmap-num" data-i18n="road_step3">Step 3</div>
+      <div class="roadmap-title" data-i18n="road_s3t">Legalization</div>
+      <div class="roadmap-desc" data-i18n="road_s3d">Apostille, notarization, and full legalization so your documents are accepted by Bulgarian institutions.</div>
+    </div>
+    <div class="roadmap-step reveal">
+      <div class="roadmap-icon">🎓</div>
+      <div class="roadmap-num" data-i18n="road_step4">Step 4</div>
+      <div class="roadmap-title" data-i18n="road_s4t">Enrollment</div>
+      <div class="roadmap-desc" data-i18n="road_s4d">We assist with the application process and university registration until you are officially enrolled.</div>
+    </div>
+  </div>
+</section>
+
 <section id="faq">
   <div class="reveal" style="text-align:center">
     <p class="stag" data-i18n="faq_tag">Common questions</p>
@@ -385,7 +542,7 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
 <script>
 var T = {
   en: {
-    nav_why:"Why Us",nav_services:"Services",nav_about:"About",nav_reviews:"Reviews",nav_order:"Order",
+    nav_why:"Why Us",nav_services:"Services",nav_prices:"Prices",nav_education:"Education",nav_about:"About",nav_reviews:"Reviews",nav_order:"Order",
     hero_badge:"Certified translations &amp; legalization",
     hero_title:"Translations &amp;<br>Legalization<br><span>BG &#8596; GR</span>",
     hero_sub:"Official, fast and reliable translation services between Bulgarian and Greek. Documents, diplomas, contracts handled personally by Petros Gogas.",
@@ -429,10 +586,22 @@ var T = {
     faq4q:"How fast is express delivery?",
     faq4a:"Orders before 11:00 AM are completed the same day. After 11:00 AM ready the next morning.",
     faq5q:"Do you handle both BG to GR and GR to BG?",
-    faq5a:"Yes. That is our core specialty. We cover both directions fully."
+    faq5a:"Yes. That is our core specialty. We cover both directions fully.",
+    edu_tag:"Education in Bulgaria",edu_title:"Study in Bulgaria",
+    edu_sub:"Choose a city and discover top universities with world-recognized degrees, affordable tuition, and vibrant student life.",
+    edu_select_city:"Select a city above to explore its universities",
+    city_sofia:"Sofia",city_plovdiv:"Plovdiv",city_varna:"Varna",city_pleven:"Pleven",
+    city_burgas:"Burgas",city_ruse:"Ruse",city_stara_zagora:"Stara Zagora",city_blagoevgrad:"Blagoevgrad",
+    road_tag:"Your journey",road_title:"Success Roadmap",
+    road_sub:"From first consultation to university enrollment — we guide you every step of the way.",
+    road_step:"Step 1",road_step2:"Step 2",road_step3:"Step 3",road_step4:"Step 4",
+    road_s1t:"Consultation",road_s1d:"Free initial consultation to assess your documents and choose the right university and program.",
+    road_s2t:"Translation",road_s2d:"Certified translation of all your documents — diplomas, transcripts, personal IDs — into Bulgarian.",
+    road_s3t:"Legalization",road_s3d:"Apostille, notarization, and full legalization so your documents are accepted by Bulgarian institutions.",
+    road_s4t:"Enrollment",road_s4d:"We assist with the application process and university registration until you are officially enrolled."
   },
   bg: {
-    nav_why:"Защо ние",nav_services:"Услуги",nav_about:"За нас",nav_reviews:"Мнения",nav_order:"Поръчай",
+    nav_why:"Защо ние",nav_services:"Услуги",nav_prices:"Цени",nav_education:"Образование",nav_about:"За нас",nav_reviews:"Мнения",nav_order:"Поръчай",
     hero_badge:"Сертифицирани преводи и легализация",
     hero_title:"Преводи и<br>Легализация<br><span>БГ &#8596; ГР</span>",
     hero_sub:"Официални, бързи и надеждни преводи между български и гръцки. Документи, дипломи, договори — лично от Петрос Гогас.",
@@ -476,10 +645,22 @@ var T = {
     faq4q:"Колко бърз е експресният превод?",
     faq4a:"Поръчки преди 11:00 ч. са готови същия ден. След 11:00 ч. следващата сутрин.",
     faq5q:"Правите ли и двете посоки — БГ към ГР и ГР към БГ?",
-    faq5a:"Да, това е нашата основна специализация. Покриваме изцяло и двете посоки."
+    faq5a:"Да, това е нашата основна специализация. Покриваме изцяло и двете посоки.",
+    edu_tag:"Образование в България",edu_title:"Учи в България",
+    edu_sub:"Избери град и открий водещи университети със световно признати дипломи, достъпно обучение и вълнуващ студентски живот.",
+    edu_select_city:"Изберете град по-горе, за да разгледате университетите",
+    city_sofia:"София",city_plovdiv:"Пловдив",city_varna:"Варна",city_pleven:"Плевен",
+    city_burgas:"Бургас",city_ruse:"Русе",city_stara_zagora:"Стара Загора",city_blagoevgrad:"Благоевград",
+    road_tag:"Вашият път",road_title:"Пътека към успеха",
+    road_sub:"От първата консултация до записването в университета — водим ви на всяка стъпка.",
+    road_step:"Стъпка 1",road_step2:"Стъпка 2",road_step3:"Стъпка 3",road_step4:"Стъпка 4",
+    road_s1t:"Консултация",road_s1d:"Безплатна първоначална консултация за оценка на документите ви и избор на подходящ университет и програма.",
+    road_s2t:"Превод",road_s2d:"Сертифициран превод на всичките ви документи — дипломи, академични справки, лични документи — на български.",
+    road_s3t:"Легализация",road_s3d:"Апостил, нотариална заверка и пълна легализация, за да бъдат документите ви приети от българските институции.",
+    road_s4t:"Записване",road_s4d:"Помагаме с процеса по кандидатстване и записване в университета до пълното ви зачисляване."
   },
   gr: {
-    nav_why:"Γιατί εμείς",nav_services:"Υπηρεσίες",nav_about:"Σχετικά",nav_reviews:"Κριτικές",nav_order:"Παραγγελία",
+    nav_why:"Γιατί εμείς",nav_services:"Υπηρεσίες",nav_prices:"Τιμές",nav_education:"Εκπαίδευση",nav_about:"Σχετικά",nav_reviews:"Κριτικές",nav_order:"Παραγγελία",
     hero_badge:"Πιστοποιημένες μεταφράσεις και νομιμοποίηση",
     hero_title:"Μεταφράσεις και<br>Νομιμοποίηση<br><span>ΒΓ &#8596; ΕΛ</span>",
     hero_sub:"Επίσημες, γρήγορες μεταφράσεις μεταξύ βουλγαρικής και ελληνικής. Έγγραφα, πτυχία, συμβόλαια — προσωπικά από τον Πέτρο Γκόγκα.",
@@ -523,7 +704,19 @@ var T = {
     faq4q:"Πόσο γρήγορη είναι η εξπρές μετάφραση;",
     faq4a:"Παραγγελίες πριν τις 11:00 παραδίδονται την ίδια μέρα.",
     faq5q:"Καλύπτετε και τις δύο κατευθύνσεις;",
-    faq5a:"Ναι, αυτή είναι η βασική μας εξειδίκευση. Καλύπτουμε πλήρως και τις δύο κατευθύνσεις."
+    faq5a:"Ναι, αυτή είναι η βασική μας εξειδίκευση. Καλύπτουμε πλήρως και τις δύο κατευθύνσεις.",
+    edu_tag:"Εκπαίδευση στη Βουλγαρία",edu_title:"Σπουδές στη Βουλγαρία",
+    edu_sub:"Επιλέξτε πόλη και ανακαλύψτε κορυφαία πανεπιστήμια με παγκοσμίως αναγνωρισμένα πτυχία, προσιτά δίδακτρα και ζωντανή φοιτητική ζωή.",
+    edu_select_city:"Επιλέξτε πόλη παραπάνω για να εξερευνήσετε τα πανεπιστήμιά της",
+    city_sofia:"Σόφια",city_plovdiv:"Φιλιππούπολη",city_varna:"Βάρνα",city_pleven:"Πλέβεν",
+    city_burgas:"Μπουργκάς",city_ruse:"Ρούσε",city_stara_zagora:"Στάρα Ζαγόρα",city_blagoevgrad:"Μπλαγκόεβγκραντ",
+    road_tag:"Η διαδρομή σας",road_title:"Οδικός Χάρτης Επιτυχίας",
+    road_sub:"Από την πρώτη συμβουλευτική έως την εγγραφή στο πανεπιστήμιο — σας καθοδηγούμε σε κάθε βήμα.",
+    road_step:"Βήμα 1",road_step2:"Βήμα 2",road_step3:"Βήμα 3",road_step4:"Βήμα 4",
+    road_s1t:"Συμβουλευτική",road_s1d:"Δωρεάν αρχική συμβουλευτική για αξιολόγηση των εγγράφων σας και επιλογή του κατάλληλου πανεπιστημίου και προγράμματος.",
+    road_s2t:"Μετάφραση",road_s2d:"Πιστοποιημένη μετάφραση όλων των εγγράφων σας — πτυχία, αναλυτικές βαθμολογίες, προσωπικά έγγραφα — στα βουλγαρικά.",
+    road_s3t:"Νομιμοποίηση",road_s3d:"Apostille, συμβολαιογραφική επικύρωση και πλήρης νομιμοποίηση ώστε τα έγγραφά σας να γίνονται δεκτά από τα βουλγαρικά ιδρύματα.",
+    road_s4t:"Εγγραφή",road_s4d:"Σας βοηθάμε με τη διαδικασία υποβολής αίτησης και εγγραφής στο πανεπιστήμιο μέχρι την επίσημη εγγραφή σας."
   }
 };
 
@@ -550,6 +743,282 @@ document.querySelectorAll('.reveal').forEach(function(r) { obs.observe(r); });
 document.querySelectorAll('.fq').forEach(function(q) {
   q.addEventListener('click', function() { q.parentElement.classList.toggle('open'); });
 });
+
+/* ===================== UNIVERSITY DATA ===================== */
+var currentLang = 'en';
+var UNIS = {
+  sofia: [
+    {
+      name:{en:"Sofia University \"St. Kliment Ohridski\"",bg:"СУ \"Св. Климент Охридски\"",gr:"Πανεπιστήμιο Σόφιας «Αγ. Κλήμης Οχρίδας»"},
+      desc:{
+        en:"The oldest and most prestigious university in Bulgaria, founded in 1888. It offers world-recognized degrees in Law and Medicine. Greek students appreciate its vast library and central location in Sofia.",
+        bg:"Най-старият и авторитетен университет в България, основан през 1888 г. Предлага световно признати дипломи по Право и Медицина. Гръцките студенти го ценят заради огромната библиотека и централното местоположение в София.",
+        gr:"Το παλαιότερο και πιο αναγνωρισμένο πανεπιστήμιο στη Βουλγαρία, ιδρύθηκε το 1888. Προσφέρει παγκοσμίως αναγνωρισμένα πτυχία στη Νομική και Ιατρική. Οι Έλληνες φοιτητές το εκτιμούν για την τεράστια βιβλιοθήκη και την κεντρική τοποθεσία του στη Σόφια."
+      },
+      specs:{
+        en:["Law","Medicine","Philosophy"],
+        bg:["Право","Медицина","Философия"],
+        gr:["Νομική","Ιατρική","Φιλοσοφία"]
+      }
+    },
+    {
+      name:{en:"Medical University — Sofia",bg:"Медицински университет — София",gr:"Ιατρικό Πανεπιστήμιο — Σόφια"},
+      desc:{
+        en:"The leading medical institution in the Balkans. Features high-tech facilities and English-language programs that attract hundreds of Greek students every year. Internationally accredited and constantly ranked among the best.",
+        bg:"Лидер в медицинското образование на Балканите. Високотехнологични бази и англоезични програми, които привличат стотици гърци всяка година. Международно акредитиран и неизменно класиран сред най-добрите.",
+        gr:"Το κορυφαίο ιατρικό ίδρυμα στα Βαλκάνια. Διαθέτει υπερσύγχρονες εγκαταστάσεις και αγγλόφωνα προγράμματα που προσελκύουν εκατοντάδες Έλληνες φοιτητές κάθε χρόνο. Διεθνώς αναγνωρισμένο."
+      },
+      specs:{
+        en:["General Medicine","Dentistry","Pharmacy"],
+        bg:["Обща медицина","Стоматология","Фармация"],
+        gr:["Γενική Ιατρική","Οδοντιατρική","Φαρμακευτική"]
+      }
+    },
+    {
+      name:{en:"UNWE — University of National and World Economy",bg:"УНСС — Университет за национално и световно стопанство",gr:"UNWE — Πανεπιστήμιο Εθνικής και Παγκόσμιας Οικονομίας"},
+      desc:{
+        en:"The largest economics university in Southeast Europe. Offers diverse programs in business, finance, and public administration. A natural choice for students aiming for careers in EU institutions and international organizations.",
+        bg:"Най-големият икономически университет в Югоизточна Европа. Предлага разнообразни програми по бизнес, финанси и публична администрация. Естествен избор за студенти, целящи кариери в институциите на ЕС.",
+        gr:"Το μεγαλύτερο οικονομικό πανεπιστήμιο στη Νοτιοανατολική Ευρώπη. Προσφέρει ποικίλα προγράμματα σε επιχειρήσεις, χρηματοοικονομικά και δημόσια διοίκηση. Φυσική επιλογή για σταδιοδρομίες σε θεσμούς της ΕΕ."
+      },
+      specs:{
+        en:["Business Administration","Finance","International Relations"],
+        bg:["Бизнес администрация","Финанси","Международни отношения"],
+        gr:["Διοίκηση Επιχειρήσεων","Χρηματοοικονομικά","Διεθνείς Σχέσεις"]
+      }
+    }
+  ],
+  plovdiv: [
+    {
+      name:{en:"Medical University — Plovdiv",bg:"Медицински университет — Пловдив",gr:"Ιατρικό Πανεπιστήμιο — Φιλιππούπολη"},
+      desc:{
+        en:"An exceptionally modern campus with outstanding training in Pharmacy and Dentistry. The university is a top choice for Greek students thanks to its clinical partnerships and hands-on approach to medical education.",
+        bg:"Изключително модерен кампус и отлична подготовка по Фармация и Стоматология. Университетът е топ избор за гръцки студенти благодарение на клиничните си партньорства и практическия подход в медицинското обучение.",
+        gr:"Εξαιρετικά σύγχρονο campus με εξαιρετική εκπαίδευση στη Φαρμακευτική και Οδοντιατρική. Κορυφαία επιλογή για Έλληνες φοιτητές χάρη στις κλινικές συνεργασίες και την πρακτική προσέγγιση στην ιατρική εκπαίδευση."
+      },
+      specs:{
+        en:["Pharmacy","Dentistry","General Medicine"],
+        bg:["Фармация","Стоматология","Обща медицина"],
+        gr:["Φαρμακευτική","Οδοντιατρική","Γενική Ιατρική"]
+      }
+    },
+    {
+      name:{en:"Plovdiv University \"Paisii Hilendarski\"",bg:"ПУ \"Паисий Хилендарски\"",gr:"Πανεπιστήμιο Φιλιππούπολης «Παΐσιος Χιλεντάρσκι»"},
+      desc:{
+        en:"The second oldest university in Bulgaria, located in the cultural capital. Strong programs in humanities, natural sciences, and IT. Plovdiv's vibrant arts scene and affordable living costs make it very attractive for international students.",
+        bg:"Вторият по старост университет в България, разположен в културната столица. Силни програми по хуманитарни, природни науки и ИТ. Богатият културен живот на Пловдив и достъпните разходи за живот го правят много привлекателен.",
+        gr:"Το δεύτερο παλαιότερο πανεπιστήμιο στη Βουλγαρία, στην πολιτιστική πρωτεύουσα. Ισχυρά προγράμματα σε ανθρωπιστικές, θετικές επιστήμες και πληροφορική. Το ζωντανό πολιτιστικό κλίμα και το χαμηλό κόστος ζωής το καθιστούν ελκυστικό."
+      },
+      specs:{
+        en:["Informatics","Philology","Chemistry"],
+        bg:["Информатика","Филология","Химия"],
+        gr:["Πληροφορική","Φιλολογία","Χημεία"]
+      }
+    }
+  ],
+  varna: [
+    {
+      name:{en:"Medical University — Varna",bg:"Медицински университет — Варна",gr:"Ιατρικό Πανεπιστήμιο — Βάρνα"},
+      desc:{
+        en:"Located by the Black Sea, offering a unique combination of top academic standards and high quality of life. The seaside location provides a relaxed study environment that Greek students find familiar and comfortable.",
+        bg:"Разположен на морето, предлага уникална комбинация от академично ниво и висок стандарт на живот. Морската локация осигурява спокойна среда за обучение, позната и комфортна за гръцките студенти.",
+        gr:"Στις ακτές της Μαύρης Θάλασσας, προσφέρει μοναδικό συνδυασμό υψηλών ακαδημαϊκών προδιαγραφών και ποιότητας ζωής. Η θαλάσσια τοποθεσία παρέχει ένα χαλαρό περιβάλλον σπουδών, οικείο στους Έλληνες φοιτητές."
+      },
+      specs:{
+        en:["General Medicine","Dental Medicine","Public Health"],
+        bg:["Обща медицина","Дентална медицина","Обществено здраве"],
+        gr:["Γενική Ιατρική","Οδοντιατρική","Δημόσια Υγεία"]
+      }
+    },
+    {
+      name:{en:"Varna University of Economics",bg:"Икономически университет — Варна",gr:"Οικονομικό Πανεπιστήμιο Βάρνας"},
+      desc:{
+        en:"A top-ranked economics university in Bulgaria with strong programs in Tourism Management, International Business, and IT. Varna's status as a major port and tourism hub provides excellent internship and career opportunities.",
+        bg:"Водещ икономически университет в България със силни програми по Туристически мениджмънт, Международен бизнес и ИТ. Статутът на Варна като голямо пристанище и туристически център осигурява отлични стажове и кариерни възможности.",
+        gr:"Κορυφαίο οικονομικό πανεπιστήμιο στη Βουλγαρία με ισχυρά προγράμματα σε Τουριστική Διοίκηση, Διεθνές Εμπόριο και Πληροφορική. Η Βάρνα ως μεγάλο λιμάνι και τουριστικός κόμβος προσφέρει εξαιρετικές ευκαιρίες πρακτικής."
+      },
+      specs:{
+        en:["Tourism Management","International Business","IT"],
+        bg:["Туристически мениджмънт","Международен бизнес","ИТ"],
+        gr:["Τουριστική Διοίκηση","Διεθνές Εμπόριο","Πληροφορική"]
+      }
+    }
+  ],
+  pleven: [
+    {
+      name:{en:"Medical University — Pleven",bg:"Медицински университет — Плевен",gr:"Ιατρικό Πανεπιστήμιο — Πλέβεν"},
+      desc:{
+        en:"A well-established medical university with a focus on problem-based learning. Known for its strong clinical training in the University Hospital and an intimate campus atmosphere. English-taught programs are available for international students.",
+        bg:"Утвърден медицински университет с фокус върху проблемно-базирано обучение. Известен със силната клинична подготовка в университетската болница и приятната кампус атмосфера. Предлага англоезични програми за международни студенти.",
+        gr:"Καθιερωμένο ιατρικό πανεπιστήμιο εστιασμένο στη μάθηση βασισμένη σε προβλήματα. Γνωστό για την ισχυρή κλινική εκπαίδευση στο Πανεπιστημιακό Νοσοκομείο. Αγγλόφωνα προγράμματα διαθέσιμα για διεθνείς φοιτητές."
+      },
+      specs:{
+        en:["General Medicine","Nursing","Healthcare Management"],
+        bg:["Обща медицина","Медицинска сестра","Здравен мениджмънт"],
+        gr:["Γενική Ιατρική","Νοσηλευτική","Διοίκηση Υγείας"]
+      }
+    }
+  ],
+  burgas: [
+    {
+      name:{en:"\"Prof. Dr. Asen Zlatarov\" University",bg:"Университет \"Проф. д-р Асен Златаров\"",gr:"Πανεπιστήμιο «Καθ. Δρ. Ασέν Ζλατάροφ»"},
+      desc:{
+        en:"A modern university on the Black Sea coast specializing in chemistry, engineering, and tourism. The coastal location and strong industry partnerships provide unique learning experiences. Ideal for students who want a balance of academic rigor and seaside life.",
+        bg:"Модерен университет на черноморското крайбрежие, специализиран в химия, инженерство и туризъм. Крайбрежната локация и силните индустриални партньорства осигуряват уникален опит. Идеален за студенти, търсещи баланс между академични изисквания и живот на морето.",
+        gr:"Σύγχρονο πανεπιστήμιο στην ακτή της Μαύρης Θάλασσας με εξειδίκευση στη χημεία, μηχανική και τουρισμό. Η παραθαλάσσια τοποθεσία και οι ισχυρές βιομηχανικές συνεργασίες προσφέρουν μοναδικές εμπειρίες."
+      },
+      specs:{
+        en:["Chemical Engineering","Tourism","Ecology"],
+        bg:["Химично инженерство","Туризъм","Екология"],
+        gr:["Χημική Μηχανική","Τουρισμός","Οικολογία"]
+      }
+    }
+  ],
+  ruse: [
+    {
+      name:{en:"University of Ruse \"Angel Kanchev\"",bg:"Русенски университет \"Ангел Кънчев\"",gr:"Πανεπιστήμιο Ρούσε «Άνγκελ Κάντσεφ»"},
+      desc:{
+        en:"A leading technical university on the banks of the Danube River. Strong in engineering, IT, and agricultural sciences. With affordable living costs and a calm student-friendly atmosphere, it's a hidden gem for serious engineering students.",
+        bg:"Водещ технически университет на брега на река Дунав. Силен в инженерство, ИТ и аграрни науки. С достъпни разходи за живот и спокойна студентска атмосфера, той е скрито бижу за сериозните инженерни студенти.",
+        gr:"Κορυφαίο τεχνικό πανεπιστήμιο στις όχθες του Δούναβη. Δυνατό στη μηχανική, πληροφορική και αγροτικές επιστήμες. Με χαμηλό κόστος ζωής και ήρεμη φοιτητική ατμόσφαιρα, αποτελεί κρυμμένο διαμάντι για σοβαρούς φοιτητές."
+      },
+      specs:{
+        en:["Mechanical Engineering","Computer Science","Agriculture"],
+        bg:["Машинно инженерство","Компютърни науки","Земеделие"],
+        gr:["Μηχανολογία","Πληροφορική","Γεωπονία"]
+      }
+    }
+  ],
+  stara_zagora: [
+    {
+      name:{en:"Trakia University",bg:"Тракийски университет",gr:"Πανεπιστήμιο Θράκης (Τρακία)"},
+      desc:{
+        en:"Famous for its Veterinary Medicine and Agriculture programs — among the best in Southeast Europe. Also offers Medical and Pedagogical faculties. The city provides a peaceful, affordable setting for focused academic work.",
+        bg:"Известен със своите програми по Ветеринарна медицина и Земеделие — сред най-добрите в Югоизточна Европа. Предлага също Медицински и Педагогически факултети. Градът осигурява спокойна и достъпна среда за фокусирана академична работа.",
+        gr:"Διάσημο για τα προγράμματα Κτηνιατρικής και Γεωπονίας — μεταξύ των καλύτερων στη ΝΑ Ευρώπη. Προσφέρει επίσης Ιατρική και Παιδαγωγική σχολή. Η πόλη παρέχει ένα ήσυχο, προσιτό περιβάλλον."
+      },
+      specs:{
+        en:["Veterinary Medicine","Agriculture","Medicine"],
+        bg:["Ветеринарна медицина","Земеделие","Медицина"],
+        gr:["Κτηνιατρική","Γεωπονία","Ιατρική"]
+      }
+    }
+  ],
+  blagoevgrad: [
+    {
+      name:{en:"South-West University \"Neofit Rilski\"",bg:"ЮЗУ \"Неофит Рилски\"",gr:"Νοτιοδυτικό Πανεπιστήμιο «Νεόφιτ Ρίλσκι»"},
+      desc:{
+        en:"A comprehensive university nestled near the Rila and Pirin mountains. Strong programs in Law, Economics, and Philology. Its proximity to Greece makes it especially popular among Greek students who want to stay close to home while studying abroad.",
+        bg:"Комплексен университет в подножието на Рила и Пирин. Силни програми по Право, Икономика и Филология. Близостта му до Гърция го прави особено популярен сред гръцки студенти, които искат да останат близо до родината си докато учат в чужбина.",
+        gr:"Ολοκληρωμένο πανεπιστήμιο κοντά στα βουνά Ρίλα και Πίριν. Ισχυρά προγράμματα σε Νομική, Οικονομικά και Φιλολογία. Η εγγύτητά του στην Ελλάδα το καθιστά ιδιαίτερα δημοφιλές στους Έλληνες φοιτητές που θέλουν να μείνουν κοντά στο σπίτι τους."
+      },
+      specs:{
+        en:["Law","Economics","Philology"],
+        bg:["Право","Икономика","Филология"],
+        gr:["Νομική","Οικονομικά","Φιλολογία"]
+      }
+    },
+    {
+      name:{en:"American University in Bulgaria (AUBG)",bg:"Американски университет в България (АУБГ)",gr:"Αμερικανικό Πανεπιστήμιο Βουλγαρίας (AUBG)"},
+      desc:{
+        en:"A private liberal arts university with an American-style education. All courses are taught in English with small class sizes and world-class faculty. Graduates are accepted into top master's programs worldwide. A premium choice for ambitious students.",
+        bg:"Частен хуманитарен университет с американски стил на обучение. Всички курсове са на английски с малки групи и преподаватели от световна класа. Завършилите са приемани в топ магистратури по света. Премиум избор за амбициозни студенти.",
+        gr:"Ιδιωτικό πανεπιστήμιο ελεύθερων τεχνών αμερικανικού τύπου. Όλα τα μαθήματα στα αγγλικά με μικρά τμήματα και καθηγητές παγκόσμιου βεληνεκούς. Κορυφαία επιλογή για φιλόδοξους φοιτητές."
+      },
+      specs:{
+        en:["Business Administration","Political Science","Computer Science"],
+        bg:["Бизнес администрация","Политически науки","Компютърни науки"],
+        gr:["Διοίκηση Επιχειρήσεων","Πολιτικές Επιστήμες","Πληροφορική"]
+      }
+    }
+  ]
+};
+
+/* ===================== MODAL FUNCTIONS ===================== */
+function openPricesModal() {
+  var m = document.getElementById('pricesModal');
+  m.style.display = 'flex';
+  requestAnimationFrame(function() { m.classList.add('open'); });
+  document.body.style.overflow = 'hidden';
+}
+function closePricesModal() {
+  var m = document.getElementById('pricesModal');
+  m.classList.remove('open');
+  setTimeout(function() { m.style.display = 'none'; document.body.style.overflow = ''; }, 350);
+}
+document.getElementById('pricesModal').addEventListener('click', function(e) {
+  if (e.target === this) closePricesModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePricesModal();
+});
+
+/* ===================== HAMBURGER MENU ===================== */
+function toggleMobileMenu() {
+  document.querySelector('.hamburger').classList.toggle('active');
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.querySelector('.hamburger').classList.remove('active');
+  document.getElementById('mobMenu').classList.remove('open');
+}
+
+/* ===================== NAV SCROLL EFFECT ===================== */
+window.addEventListener('scroll', function() {
+  document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ===================== EDUCATION: CITY SELECTION ===================== */
+function selectCity(city) {
+  var btns = document.querySelectorAll('.city-btn');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  event.currentTarget.classList.add('active');
+
+  var container = document.getElementById('uniContainer');
+  var unis = UNIS[city];
+  if (!unis || unis.length === 0) {
+    container.innerHTML = '<div class="uni-empty" data-i18n="edu_select_city">No universities found</div>';
+    return;
+  }
+
+  var html = '<div class="uni-grid">';
+  unis.forEach(function(u, i) {
+    html += '<div class="uni-card" style="transition-delay:' + (i * 100) + 'ms">';
+    html += '<div class="uni-img-placeholder">🏛</div>';
+    html += '<div class="uni-body">';
+    html += '<div class="uni-name">' + u.name[currentLang] + '</div>';
+    html += '<div class="uni-desc">' + u.desc[currentLang] + '</div>';
+    html += '<ul class="uni-specs">';
+    u.specs[currentLang].forEach(function(s) {
+      html += '<li>' + s + '</li>';
+    });
+    html += '</ul></div></div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+
+  // Animate cards in
+  setTimeout(function() {
+    document.querySelectorAll('.uni-card').forEach(function(card) {
+      card.classList.add('show');
+    });
+  }, 50);
+}
+
+/* ===================== OVERRIDE setLang TO TRACK LANGUAGE ===================== */
+var _origSetLang = setLang;
+setLang = function(lang) {
+  currentLang = lang;
+  _origSetLang(lang);
+  // Re-render active city universities if any
+  var activeCity = document.querySelector('.city-btn.active');
+  if (activeCity) {
+    activeCity.click();
+  }
+};
+
+/* ===================== RE-OBSERVE NEW REVEALS ===================== */
+document.querySelectorAll('.reveal:not(.visible)').forEach(function(r) { obs.observe(r); });
 </script>
 </body>
 </html>
