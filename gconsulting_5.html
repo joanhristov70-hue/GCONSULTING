@@ -48,21 +48,36 @@
 [data-theme="dark"] .atag{background:rgba(59,130,246,.15);color:var(--blue-light)}
 [data-theme="dark"] .sofia:not(.ch){background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:var(--blue-light)}
 [data-theme="dark"] .fi{border-color:rgba(255,255,255,.08)}
-[data-theme="dark"] .fq{color:var(--blue-light)}
+[data-theme="dark"] .fq{color:#e2e8f0}
+[data-theme="dark"] .fq:hover{color:var(--blue-light)}
+[data-theme="dark"] .ftog{color:var(--blue-light)}
+[data-theme="dark"] .fa{color:#94a3b8}
+[data-theme="dark"] #faq .stitle{color:#ffffff}
 [data-theme="dark"] footer{background:#080c16}
 [data-theme="dark"] .fs{opacity:.5}
 [data-theme="dark"] .fsg{opacity:.5}
+[data-theme="dark"] .oft{color:#ffffff}
+[data-theme="dark"] .chl{color:#e2e8f0}
+[data-theme="dark"] .uni-name{color:#e2e8f0}
+[data-theme="dark"] .uni-desc{color:#94a3b8}
+[data-theme="dark"] .uni-specs li{color:#cbd5e1;border-color:rgba(255,255,255,.06)}
+[data-theme="dark"] .uni-specs li::before{content:'🎓'}
+[data-theme="dark"] .uni-img-placeholder{background:linear-gradient(135deg,#1e3a5f,#1e4080)}
+[data-theme="dark"] .hbadge{background:rgba(59,130,246,.18);border-color:rgba(59,130,246,.4)}
+[data-theme="dark"] .hbadge span{color:#e2e8f0}
+[data-theme="dark"] .map-container{background:#1a2234;border-color:rgba(59,130,246,.2)}
+[data-theme="dark"] .uni-empty{color:#94a3b8}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--off);color:var(--text);overflow-x:hidden;transition:background .4s,color .4s}
 
 /* Reading Progress Bar */
-.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue-mid),var(--blue-light));z-index:1100;width:0;transition:width .1s linear}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--blue-mid),var(--blue-light),#93c5fd);z-index:1100;width:0;transition:width .15s linear;box-shadow:0 0 8px rgba(59,130,246,.5)}
 
 /* Scroll to top */
-.scroll-top{position:fixed;bottom:100px;right:28px;width:44px;height:44px;border-radius:50%;background:var(--blue-mid);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1500;opacity:0;transform:translateY(10px);transition:all .3s var(--ease-premium);box-shadow:0 4px 16px rgba(37,99,184,.3)}
+.scroll-top{position:fixed;bottom:100px;right:28px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));color:#fff;border:1px solid rgba(255,255,255,.15);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1500;opacity:0;transform:translateY(10px);transition:all .35s var(--ease-premium);box-shadow:0 4px 20px rgba(37,99,184,.4),0 0 0 0 rgba(37,99,184,.3)}
 .scroll-top.visible{opacity:1;transform:translateY(0)}
-.scroll-top:hover{background:var(--blue-light);transform:translateY(-2px)}
+.scroll-top:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(37,99,184,.5),0 0 0 6px rgba(37,99,184,.1)}
 .scroll-top svg{width:20px;height:20px}
 
 /* Dark mode toggle */
@@ -114,7 +129,8 @@ h1.ht span{color:var(--blue-light)}
 .fsg{height:4px;background:repeating-linear-gradient(90deg,var(--blue-mid) 0,var(--blue-mid) 20%,#fff 20%,#fff 40%);width:100%}
 
 section{padding:110px 56px}
-.stag{display:inline-block;color:var(--blue-mid);font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.stag{display:inline-flex;align-items:center;gap:10px;color:var(--blue-mid);font-size:.72rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.stag::before{content:'';display:inline-block;width:22px;height:2px;background:currentColor;border-radius:2px;opacity:.6;flex-shrink:0}
 .stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,2.9rem);color:var(--blue-dark);line-height:1.15;margin-bottom:16px;font-weight:700;letter-spacing:-0.02em}
 .ssub{color:var(--gray);font-size:.97rem;line-height:1.8;max-width:540px;font-weight:300}
 
@@ -207,6 +223,26 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
 
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease-premium),transform .7s var(--ease-premium)}
 .reveal.visible{opacity:1;transform:translateY(0)}
+/* Staggered cascade for grid children */
+.wcard.reveal:nth-child(1){transition-delay:.05s}
+.wcard.reveal:nth-child(2){transition-delay:.15s}
+.wcard.reveal:nth-child(3){transition-delay:.25s}
+.wcard.reveal:nth-child(4){transition-delay:.35s}
+.rcard.reveal:nth-child(1){transition-delay:.05s}
+.rcard.reveal:nth-child(2){transition-delay:.17s}
+.rcard.reveal:nth-child(3){transition-delay:.29s}
+.fi.reveal:nth-child(1){transition-delay:.04s}
+.fi.reveal:nth-child(2){transition-delay:.10s}
+.fi.reveal:nth-child(3){transition-delay:.16s}
+.fi.reveal:nth-child(4){transition-delay:.22s}
+.fi.reveal:nth-child(5){transition-delay:.28s}
+.fi.reveal:nth-child(6){transition-delay:.34s}
+.fi.reveal:nth-child(7){transition-delay:.40s}
+.fi.reveal:nth-child(8){transition-delay:.46s}
+.roadmap-step.reveal:nth-child(1){transition-delay:.05s}
+.roadmap-step.reveal:nth-child(2){transition-delay:.17s}
+.roadmap-step.reveal:nth-child(3){transition-delay:.29s}
+.roadmap-step.reveal:nth-child(4){transition-delay:.41s}
 
 /* Hamburger menu */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:1100;background:none;border:none}
@@ -219,9 +255,9 @@ footer{background:var(--blue-dark);color:rgba(255,255,255,.45);padding:36px 56px
 .mob-menu a,.mob-menu button{display:block;text-decoration:none;color:rgba(255,255,255,.85);font-size:.95rem;font-weight:500;padding:12px 0;border:none;background:none;cursor:pointer;text-align:left;font-family:'Inter',sans-serif;border-bottom:1px solid rgba(74,134,216,.12)}
 .mob-menu a:hover,.mob-menu button:hover{color:var(--blue-light)}
 
-/* Enhanced Glassmorphism Nav */
-nav{position:fixed;top:0;width:100%;z-index:1000;padding:14px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,25,60,.72);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(74,134,216,.2);box-shadow:0 4px 30px rgba(0,0,0,.15);transition:background .3s}
-nav.scrolled{background:rgba(10,25,60,.92)}
+/* Glassmorphism Nav */
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:14px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,25,60,.65);backdrop-filter:blur(15px) saturate(2);-webkit-backdrop-filter:blur(15px) saturate(2);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 1px 0 rgba(74,134,216,.18),0 8px 32px rgba(0,0,0,.2);transition:background .4s var(--ease-premium)}
+nav.scrolled{background:rgba(10,25,60,.88)}
 
 /* Prices button in nav */
 .nav-prices-btn{background:linear-gradient(135deg,var(--blue-mid),var(--blue-light));color:#fff!important;padding:6px 18px;border-radius:100px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .3s;letter-spacing:.3px}
@@ -235,7 +271,7 @@ nav.scrolled{background:rgba(10,25,60,.92)}
 .modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:1.8rem;color:var(--gray);cursor:pointer;padding:8px;line-height:1;transition:color .2s;z-index:1}
 .modal-close:hover{color:var(--red)}
 .modal-header{text-align:center;margin-bottom:36px}
-.modal-header .stag{display:inline-block;color:var(--blue-mid);font-size:.75rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.modal-header .stag{display:inline-flex;align-items:center;gap:10px;color:var(--blue-mid);font-size:.75rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
 .modal-header .stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3vw,2.4rem);color:var(--blue-dark);line-height:1.2;margin-bottom:10px;font-weight:700}
 .modal-header .ssub{color:var(--gray);font-size:.93rem;line-height:1.7;max-width:500px;margin:0 auto}
 
@@ -243,7 +279,7 @@ nav.scrolled{background:rgba(10,25,60,.92)}
 #education{background:linear-gradient(180deg,#f7f9fe 0%,var(--off) 100%);padding:110px 56px;overflow:hidden}
 .edu-intro{text-align:center;margin-bottom:56px}
 .city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:48px;max-width:880px;margin-left:auto;margin-right:auto}
-.city-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 12px;border-radius:16px;border:1.5px solid rgba(26,79,160,.1);background:var(--white);cursor:pointer;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;color:var(--blue-dark);transition:all .5s var(--ease-premium);box-shadow:var(--shadow-card);position:relative;overflow:hidden}
+.city-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 12px;border-radius:16px;border:1.5px solid rgba(26,79,160,.1);background:var(--white);cursor:pointer;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.2px;line-height:1.25;color:var(--blue-dark);transition:all .5s var(--ease-premium);box-shadow:var(--shadow-card);position:relative;overflow:hidden}
 .city-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,184,.05),transparent);opacity:0;transition:opacity .3s}
 .city-btn:hover::before{opacity:1}
 .city-btn:hover{border-color:var(--blue-mid);box-shadow:var(--shadow-hover);transform:translateY(-4px)}
@@ -259,7 +295,7 @@ nav.scrolled{background:rgba(10,25,60,.92)}
 .uni-img-placeholder{width:100%;height:250px;background:linear-gradient(135deg,var(--blue-dark),var(--blue-mid));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:3rem;position:relative;overflow:hidden}
 .uni-img-placeholder::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='55' x='50' text-anchor='middle' font-size='40' fill='rgba(255,255,255,0.08)'%3E🏛%3C/text%3E%3C/svg%3E") center/60px repeat}
 .uni-body{padding:26px}
-.uni-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--blue-dark);margin-bottom:10px;line-height:1.3}
+.uni-name{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:700;color:var(--blue-dark);margin-bottom:10px;line-height:1.28;letter-spacing:-0.01em}
 .uni-desc{color:var(--gray);font-size:.88rem;line-height:1.75;margin-bottom:16px}
 .uni-specs{list-style:none;padding:0}
 .uni-specs li{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.85rem;color:var(--text);font-weight:500;border-bottom:1px solid rgba(0,0,0,.05)}
@@ -499,14 +535,14 @@ nav.scrolled{background:rgba(10,25,60,.92)}
     <p class="ssub" style="max-width:640px;margin:0 auto" data-i18n="edu_sub">Choose a city and discover top universities with world-recognized degrees, affordable tuition, and vibrant student life.</p>
   </div>
   <div class="city-grid" id="cityGrid">
-    <button class="city-btn" onclick="selectCity('sofia')"><span class="city-icon">🏙️</span><span data-i18n="city_sofia">Sofia</span></button>
-    <button class="city-btn" onclick="selectCity('plovdiv')"><span class="city-icon">🏛️</span><span data-i18n="city_plovdiv">Plovdiv</span></button>
-    <button class="city-btn" onclick="selectCity('varna')"><span class="city-icon">🌊</span><span data-i18n="city_varna">Varna</span></button>
-    <button class="city-btn" onclick="selectCity('pleven')"><span class="city-icon">🏥</span><span data-i18n="city_pleven">Pleven</span></button>
-    <button class="city-btn" onclick="selectCity('burgas')"><span class="city-icon">⛱️</span><span data-i18n="city_burgas">Burgas</span></button>
-    <button class="city-btn" onclick="selectCity('ruse')"><span class="city-icon">🌉</span><span data-i18n="city_ruse">Ruse</span></button>
-    <button class="city-btn" onclick="selectCity('stara_zagora')"><span class="city-icon">🌿</span><span data-i18n="city_stara_zagora">Stara Zagora</span></button>
-    <button class="city-btn" onclick="selectCity('blagoevgrad')"><span class="city-icon">⛰️</span><span data-i18n="city_blagoevgrad">Blagoevgrad</span></button>
+    <button class="city-btn" onclick="selectCity('sofia',this)"><span class="city-icon">🏙️</span><span data-i18n="city_sofia">Sofia</span></button>
+    <button class="city-btn" onclick="selectCity('plovdiv',this)"><span class="city-icon">🏛️</span><span data-i18n="city_plovdiv">Plovdiv</span></button>
+    <button class="city-btn" onclick="selectCity('varna',this)"><span class="city-icon">🌊</span><span data-i18n="city_varna">Varna</span></button>
+    <button class="city-btn" onclick="selectCity('pleven',this)"><span class="city-icon">🏥</span><span data-i18n="city_pleven">Pleven</span></button>
+    <button class="city-btn" onclick="selectCity('burgas',this)"><span class="city-icon">⛱️</span><span data-i18n="city_burgas">Burgas</span></button>
+    <button class="city-btn" onclick="selectCity('ruse',this)"><span class="city-icon">🌉</span><span data-i18n="city_ruse">Ruse</span></button>
+    <button class="city-btn" onclick="selectCity('stara_zagora',this)"><span class="city-icon">🌿</span><span data-i18n="city_stara_zagora">Stara Zagora</span></button>
+    <button class="city-btn" onclick="selectCity('blagoevgrad',this)"><span class="city-icon">⛰️</span><span data-i18n="city_blagoevgrad">Blagoevgrad</span></button>
   </div>
   <div class="uni-container" id="uniContainer">
     <div class="uni-empty" data-i18n="edu_select_city">Select a city above to explore its universities</div>
@@ -931,9 +967,7 @@ var obs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(function(r) { obs.observe(r); });
 
-document.querySelectorAll('.fq').forEach(function(q) {
-  q.addEventListener('click', function() { q.parentElement.classList.toggle('open'); });
-});
+/* FAQ handled via event delegation below */
 
 /* ===================== UNIVERSITY DATA ===================== */
 var currentLang = 'en';
@@ -1292,10 +1326,12 @@ var CITY_MAPS = {
 };
 
 /* ===================== EDUCATION: CITY SELECTION ===================== */
-function selectCity(city) {
+function selectCity(city, btn) {
   var btns = document.querySelectorAll('.city-btn');
   btns.forEach(function(b) { b.classList.remove('active'); });
-  event.currentTarget.classList.add('active');
+  // btn passed explicitly; fallback to active event target
+  var activBtn = btn || (window.event && window.event.currentTarget);
+  if (activBtn) activBtn.classList.add('active');
 
   var container = document.getElementById('uniContainer');
   var unis = UNIS[city];
@@ -1385,26 +1421,39 @@ var _origSetLang = setLang;
 setLang = function(lang) {
   currentLang = lang;
   _origSetLang(lang);
-  // Re-render active city universities if any
+  // Re-render active city in new language (no reliance on global event)
   var activeCity = document.querySelector('.city-btn.active');
   if (activeCity) {
-    activeCity.click();
+    var onclickAttr = activeCity.getAttribute('onclick') || '';
+    var cityMatch = onclickAttr.match(/selectCity\('([^']+)'/);
+    if (cityMatch) selectCity(cityMatch[1], activeCity);
   }
 };
 
-/* ===================== RE-OBSERVE NEW REVEALS & FAQ ACCORDION ===================== */
-document.querySelectorAll('.reveal:not(.visible)').forEach(function(r) { obs.observe(r); });
-// Bind all FAQ items (including newly added education ones)
-document.querySelectorAll('.fq').forEach(function(q) {
-  q.removeEventListener('click', faqToggle);
-  q.addEventListener('click', faqToggle);
+/* ===================== FAQ — EVENT DELEGATION (survives language switch) ===================== */
+document.addEventListener('click', function(e) {
+  var fq = e.target.closest('.fq');
+  if (!fq) return;
+  var fi = fq.closest('.fi');
+  if (!fi) return;
+  // Close siblings in the same fwrap
+  var fwrap = fi.closest('.fwrap');
+  if (fwrap) {
+    fwrap.querySelectorAll('.fi.open').forEach(function(openFi) {
+      if (openFi !== fi) openFi.classList.remove('open');
+    });
+  }
+  fi.classList.toggle('open');
 });
-function faqToggle() { this.parentElement.classList.toggle('open'); }
 
-// Live-clear form errors on input
+/* ===================== RE-OBSERVE NEW REVEALS ===================== */
+document.querySelectorAll('.reveal:not(.visible)').forEach(function(r) { obs.observe(r); });
+
+/* ===================== LIVE-CLEAR FORM ERRORS ===================== */
 document.querySelectorAll('#inquiryForm input, #inquiryForm select').forEach(function(el) {
   el.addEventListener('input', function() {
-    this.closest('.fg').classList.remove('error');
+    var fg = this.closest('.fg');
+    if (fg) fg.classList.remove('error');
   });
 });
 </script>
